@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path('tipocabañas/', include('tipocabañas.urls')), 
+    path('authors/', include('cliente.urls')),
     
 ]
