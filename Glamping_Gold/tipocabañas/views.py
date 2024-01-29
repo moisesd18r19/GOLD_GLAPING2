@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render, redirect
 from tipocabañas.models import Tipocabaña
+from .forms import TipocabañaForm
 
 def tipocabañas(request):    
     tipocabañas_list = Tipocabaña.objects.all()    
@@ -12,6 +13,10 @@ def change_status_tipocabaña(request, tipocabaña_id):
     tipocabaña.save()
     return redirect('tipocabañas')
 
-def tipocabañas(request):
-    return render(request, 'tipocabañas/index.html')
-# Create your views here.
+def create_tipocabaña(request):
+    form = TipocabañaForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('tipocabañas')    
+    return render(request, 'tipocabañas/create.html', {'form': form})
+
