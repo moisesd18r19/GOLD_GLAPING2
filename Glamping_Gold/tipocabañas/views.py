@@ -20,5 +20,4 @@ def create_tipocabaña(request):
         return redirect('tipocabañas')    
     return render(request, 'tipocabañas/create.html', {'form': form})
 
-def reversa():
 
