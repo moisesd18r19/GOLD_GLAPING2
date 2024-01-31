@@ -27,7 +27,4 @@ urlpatterns = [
     path('cabañas/' , include('cabañas.urls')),
     path('reservas/', include('reservas.urls'))
     
-    
-  
-    
 ]
