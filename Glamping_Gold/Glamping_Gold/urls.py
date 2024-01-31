@@ -23,7 +23,11 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('tipocabañas/', include('tipocabañas.urls')), 
     path('clientes/', include('cliente.urls')),
-    path('servicios/', include('servicios.urls'))
+    path('servicios/', include('servicios.urls')),
+    path('cabañas/' , include('cabañas.urls')),
+    path('reservas/', include('reservas.urls'))
+    
+    
   
     
 ]
