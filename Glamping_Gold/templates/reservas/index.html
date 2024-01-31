@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h4 class="m-0 font-weight-bold text-primary">Reservas</h4>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">            
+            <a href="{% url 'create_reserva' %}" class="btn btn-primary btn-icon-split mb-3">
+                <span class="icon text-white-50">
+                  <i class="fas fa-plus"></i>
+              </span>
+              <span class="text">Crear Reserva</span>
+            </a>
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Fecha reserva</th>
+                        <th>Fecha inicio</th>
+                        <th>Fecha fin</th>
+                        <th>Valor</th>                        
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>                
+                <tbody>
+                    {% for reserva in reservas_list %}
+                    <tr>
+                    <td>{{ reserva.fecha_reserva }}</td>
+                    <td>{{ reserva.fecha_inicio }}</td>
+                    <td>{{ reserva.fecha_fin }}</td>
+                    <td>{{ reserva.valor }}</td>
+                    <!-- Toggle Switch button -->
+                    <td>
+                        <select>
+                            <li>vsdv</li>
+                            <li>cdsvd</li>
+                        </select>
+                            
+                            
+                        
+                        
+                    
+                        <a href="" class="btn btn-info btn-circle btn-sm">
+                            <i class="fas fa-info-circle"></i>
+                        </a>
+                        <a href="" class="btn btn-warning btn-circle btn-sm">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="" class="btn btn-danger btn-circle btn-sm">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+                    </tr>
+                    {% endfor %}                                     
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{%endblock%}

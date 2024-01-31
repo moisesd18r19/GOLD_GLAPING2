@@ -1,3 +1,7 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h4 class="m-0 font-weight-bold text-primary">Cabañas</h4>
@@ -19,9 +23,10 @@
                         <td>Precio</td>
                         <td>Descripción</td>
                         <td>Imagen</td>
+                        <td>Tipo Cabaña</td>
                         <td>Estado</td>   
                         <td>Acciones</td>                    
-                    </tr>x|
+                    </tr>
                 </thead>                
                 <tbody>
                     {% for cabaña in cabañas_list %}
@@ -30,7 +35,7 @@
                     <td>{{ cabaña.capacidad }}</td>
                     <td>{{ cabaña.precio }}</td>
                     <td>{{ cabaña.descripcion }}</td>
-                    <td>{{ cabaña.imagen }}</td>
+                    <td> <img src="{{ cabaña.imagen.url }}" alt="" width="50"> </td>
                     <td>{{ cabaña.tipocabaña }}</td>
                     
                     
@@ -62,3 +67,4 @@
         </div>
     </div>
 </div>
+{%endblock%}
