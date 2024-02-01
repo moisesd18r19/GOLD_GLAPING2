@@ -23,6 +23,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('tipocabañas/', include('tipocabañas.urls')), 
     path('clientes/', include('cliente.urls')),
+    path('servicios/', include('servicios.urls'))
   
     
 ]

@@ -44,7 +44,7 @@
                         </form>
                     </td>
                     <td>
-                        <a href="" class="btn btn-info btn-circle btn-sm">
+                        <a href="" class="btn btn-info btn-circle btn-sm" data-bs-toggle="modal" data-bs-target="#modalId" data-cliente-id="{{ cliente.id }}">
                             <i class="fas fa-info-circle"></i>
                         </a>
                         <a href="" class="btn btn-warning btn-circle btn-sm">
@@ -61,4 +61,55 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitleId">Detalles del Cliente</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid" id="cliente-details"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Función para cargar detalles del libro en el modal
+function loadClienteDetails(clienteId) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "{% url 'detail_cliente' 0 %}".replace('0', clienteId), true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    var data = JSON.parse(xhr.responseText);
+                    console.log(data);
+                    // Actualizar el contenido del modal con los detalles del libro
+                    document.getElementById("cliente-details").innerHTML =
+                        "<p><strong>Nombre:</strong> " + data.nombre + "</p>" +               
+                    $('#modalId').modal('show'); // Mover esta línea aquí
+                } else {
+                    console.error('Error fetching cliente details. Status code: ' + xhr.status);
+                }
+            }
+        };
+        xhr.send();
+    }
+
+    // Asignar evento click a los botones de detalle del libro
+    document.addEventListener("click", function (event) {
+        if (event.target && event.target.dataset.clienteId) {
+            event.stopPropagation();
+            var clienteId = event.target.dataset.clienteId;
+            loadClienteDetails(clienteId);
+        }
+    });
+
+</script>
 {%endblock%}
