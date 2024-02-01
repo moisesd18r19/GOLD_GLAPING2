@@ -7,7 +7,7 @@
     {% if field.name == 'reserva'%}
       <select class="form-control" name="{{field.name}}" id="">
           {% for choice in field.field.choices %}
-              <option value="{{choice.0}}">{{choice.2}}</option>
+              <option value="{{choice.0}}">{{choice.1}}</option>
           {% endfor %}x
       </select>
     {% else %}

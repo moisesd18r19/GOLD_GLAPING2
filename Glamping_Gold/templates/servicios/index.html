@@ -48,7 +48,7 @@
                         <a href="" class="btn btn-warning btn-circle btn-sm">
                             <i class="fas fa-edit"></i>
                         </a>
-                        <a href="" class="btn btn-danger btn-circle btn-sm">
+                        <a href="{% url 'delete_servicio' servicio.id %}" class="deleteBtn btn btn-danger btn-circle btn-sm">
                             <i class="fas fa-trash"></i>
                         </a>
                     </td>
@@ -112,4 +112,38 @@ function loadServicioDetails(servicioId) {
     });
 
 </script>
+
+<!-- Alerta Servicios -->
+<script>
+    document.querySelectorAll('.deleteBtn').forEach(function(deleteBtn) {
+    deleteBtn.addEventListener('click', function (event) {
+        event.preventDefault(); 
+
+        swal({
+            title: "Estás seguro que deseas eliminar?",            
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {                
+                window.location.href = this.getAttribute('href');              
+            }
+        });
+    });
+});
+</script>
+
+{% if messages %}
+    {% for message in messages %}
+        <script>
+            swal({                
+                text: "{{ message }}",
+                icon: "{{ message.tags }}",
+                button: "OK",
+            });
+        </script>
+    {% endfor %}
+{% endif %}
+
 {%endblock%}
