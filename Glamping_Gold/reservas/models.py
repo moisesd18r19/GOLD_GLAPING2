@@ -7,6 +7,6 @@ class Reserva(models.Model):
     valor = models.IntegerField()
     cliente = models.ForeignKey('cliente.Cliente', on_delete= models.DO_NOTHING)
 
-    # def __str__(self):
-    #     return self.fecha_inicio
+    def __str__(self):
+        return self.fecha_inicio
 # Create your models here.
