@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from servicios.models import Servicio
 from .forms import ServicioForm
 from django.http import JsonResponse
+from django.contrib import messages
 
 def servicios(request):
     servicios_list = Servicio.objects.all()
@@ -25,3 +26,12 @@ def detail_servicio(request, servicio_id):
     servicio = Servicio.objects.get(pk=servicio_id)
     data = { 'nombre' : servicio.nombre, 'precio' : servicio.precio, 'descripcion' : servicio.descripcion }    
     return JsonResponse(data)
+
+def delete_servicio(request, servicio_id):
+    author = Servicio.objects.get(pk=servicio_id)
+    try:
+        servicios.delete()        
+        messages.success(request, 'Servicio eliminado correctamente.')
+    except:
+        messages.error(request, 'No se puede eliminar el autor porque está asociado a un libro.')
+    return redirect('servicios')
