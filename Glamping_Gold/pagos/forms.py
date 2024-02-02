@@ -1,9 +1,10 @@
 from django import forms
 from . models import Pago
+from reservas.models import Reserva
 
 
 class PagoForm(forms.ModelForm):
-    reserva = forms.ModelChoiceField
+    reserva = forms.ModelChoiceField(queryset= Reserva.objects)
     class Meta:
         model = Pago
         fields = "__all__"

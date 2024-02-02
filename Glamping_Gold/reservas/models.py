@@ -6,7 +6,7 @@ class Reserva(models.Model):
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
     valor = models.IntegerField()
-    cliente = models.ForeignKey('cliente.Cliente', on_delete= models.DO_NOTHING, default= True)
+    cliente = models.ForeignKey('cliente.Cliente', on_delete= models.DO_NOTHING)
 
     def __str__(self):
         return self.coder

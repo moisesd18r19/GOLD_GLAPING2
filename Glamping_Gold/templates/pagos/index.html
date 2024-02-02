@@ -50,17 +50,9 @@
                         <a href="" class="btn btn-warning btn-circle btn-sm">
                             <i class="fas fa-edit"></i>
                         </a>
-                        <a href="" class="btn btn-danger btn-circle btn-sm">
+                        <a href="{% url 'delete_pago' pago.id %}" class="deleteBtn btn btn-danger btn-circle btn-sm">
                             <i class="fas fa-trash"></i>
                         </a>
-                        <a href="" class="btn btn-primary btn-icon-split mb-3">
-                            <span class="icon text-white-50">
-                              <i class="fas fa-plus"></i>
-                          </span>
-                          <span class="text">Crear pago</span>
-                        </a>
-                       
-                    </td>
                     </tr>
                     {% endfor %}                                     
                 </tbody>
@@ -68,5 +60,59 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitleId">Detalles del Pago</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid" id="pago-details"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Función para cargar detalles del libro en el modal
+function loadPagoDetails(pagoId) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "{% url 'detail_pago' 0 %}".replace('0', pagoId), true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    var data = JSON.parse(xhr.responseText);
+                    console.log(data);
+                    // Actualizar el contenido del modal con los detalles del libro
+                    document.getElementById("pago-details").innerHTML =
+                        "<p><strong>Fecha:</strong> " + data.fecha + "</p>" +
+                        "<p><strong>Valor:</strong> " + data.valor + "</p>" +
+                        "<p><strong>Reserva:</strong> " + data.reserva + "</p>";                
+                    $('#modalId').modal('show'); // Mover esta línea aquí
+                } else {
+                    console.error('Error fetching pago details. Status code: ' + xhr.status);
+                }
+            }
+        };
+        xhr.send();
+    }
+
+    // Asignar evento click a los botones de detalle del libro
+    document.addEventListener("click", function (event) {
+        if (event.target && event.target.dataset.pagoId) {
+            event.stopPropagation();
+            var pagoId = event.target.dataset.pagoId;
+            loadPagoDetails(pagoId);
+        }
+    });
+
+</script>
 
 {%endblock%} 

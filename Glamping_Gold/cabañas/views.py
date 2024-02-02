@@ -21,6 +21,10 @@ def create_cabaña(request):
         return redirect('cabañas')    
     return render(request, 'cabañas/create.html', {'form': form})
 
+def detail_cabaña(request, cabaña_id):
+    cabaña = Cabaña.objects.get(pk=cabaña_id)
+    data = { 'nombre': cabaña.nombre, 'capacidad': cabaña.capacidad, 'descripcion': cabaña.descripcion }    
+    return JsonResponse(data)
 
 def detail_cabaña(request, cabaña_id):
     cabaña = Cabaña.objects.get(pk=cabaña_id)
@@ -32,8 +36,10 @@ def delete_cabaña(request, cabaña_id):
     cabaña = Cabaña.objects.get(pk=cabaña_id)
     try:
         cabaña.delete()        
+
         messages.success(request, 'cabaña eliminada correctamente.')
     except:
         messages.error(request, 'No se puede eliminar la cabaña porque está asociado a otra tabla.')
     return redirect('cabañas')
 # Create your views here.
+
