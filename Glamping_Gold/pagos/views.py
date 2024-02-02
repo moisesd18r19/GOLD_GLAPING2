@@ -15,7 +15,7 @@ def change_status_pago(request, pago_id):
 
 
 def create_pagos(request):
-    form = PagoForm(request.POST or None)
+    form = PagoForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.save()
         return redirect('pagos')    
