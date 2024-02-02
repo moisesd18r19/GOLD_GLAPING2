@@ -83,7 +83,7 @@
 </div>
 
 <script>
-// Función para cargar detalles del libro en el modal
+// Función para cargar detalles del cliente en el modal
 function loadClienteDetails(clienteId) {
         var xhr = new XMLHttpRequest();
         xhr.open("GET", "{% url 'detail_cliente' 0 %}".replace('0', clienteId), true);
@@ -92,7 +92,7 @@ function loadClienteDetails(clienteId) {
                 if (xhr.status == 200) {
                     var data = JSON.parse(xhr.responseText);
                     console.log(data);
-                    // Actualizar el contenido del modal con los detalles del libro
+                    // Actualizar el contenido del modal con los detalles del cliente
                     document.getElementById("cliente-details").innerHTML =
                         "<p><strong>Nombre:</strong> " + data.nombre + "</p>" +               
                     $('#modalId').modal('show'); // Mover esta línea aquí
@@ -104,7 +104,7 @@ function loadClienteDetails(clienteId) {
         xhr.send();
     }
 
-    // Asignar evento click a los botones de detalle del libro
+    // Asignar evento click a los botones de detalle del pago
     document.addEventListener("click", function (event) {
         if (event.target && event.target.dataset.clienteId) {
             event.stopPropagation();
