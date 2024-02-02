@@ -1,4 +1,4 @@
-<form action="{% url 'create_pago' %}" method="POST" enctype="multipart/form-data">
+<form action="{% url 'create_pagos' %}" method="POST" enctype="multipart/form-data">
   {% csrf_token %}
 
   {% for field in form %}
@@ -10,6 +10,7 @@
               <option value="{{choice.0}}">{{choice.1}}</option>
           {% endfor %}x
       </select>
+<<<<<<< HEAD
       {% else %}
       <input type="{{field.field.widget.input_type}}"
         class="form-control" name="{{field.name}}" id="" aria-describedby="helpId" placeholder="{{field.field.widget.attrs.placeholder}}">
@@ -18,4 +19,15 @@
     </div>
     {% endfor %}
     <button type="submit" class="btn btn-primary">Enviar</button>
+=======
+    {% else %}
+    <input type="{{field.field.widget.input_type}}"
+      class="form-control" name="{{field.name}}" id="" aria-describedby="helpId" placeholder="{{field.field.widget.attrs.placeholder}}">
+      <small id="helpId" class="form-text text-danger">{{field.errors}}</small>        
+      {% endif %}
+  </div>
+  {% endfor %}
+  <button type="submit" class="btn btn-primary">Enviar</button>
+    
+>>>>>>> 121877e7232d3407924e0b38f9c0233407273402
 </form>
