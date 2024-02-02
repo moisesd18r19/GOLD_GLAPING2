@@ -43,11 +43,8 @@ INSTALLED_APPS = [
     'cabañas',
     'reservas',
     'pagos',
-<<<<<<< HEAD
-=======
     'reservas_servicios',
     'reservas_cabañas'
->>>>>>> 121877e7232d3407924e0b38f9c0233407273402
 ]
 
 MIDDLEWARE = [
