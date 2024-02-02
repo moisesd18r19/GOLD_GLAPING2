@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import Cabaña
 from cabañas.forms import CabañaForm
+from django.http import JsonResponse
+from django.contrib import messages
 
 def cabañas(request):    
     cabañas_list = Cabaña.objects.all()    
@@ -19,5 +21,16 @@ def create_cabaña(request):
         return redirect('cabañas')    
     return render(request, 'cabañas/create.html', {'form': form})
 
+def detail_cabaña(request, cabaña_id):
+    cabaña = Cabaña.objects.get(pk=cabaña_id)
+    data = { 'nombre': cabaña.nombre, 'capacidad': cabaña.capacidad, 'descripcion': cabaña.descripcion }    
+    return JsonResponse(data)
 
-# Create your views here.
+def delete_cabaña(request, cabaña_id):
+    cabaña = Cabaña.objects.get(pk=cabaña_id)
+    try:
+        cabaña.delete()        
+        messages.success(request, 'Cabaña eliminada correctamente.')
+    except:
+        messages.error(request, 'No se puede eliminar la cabaña')
+    return redirect('cabañas')
