@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import Cabaña
 from cabañas.forms import CabañaForm
+from django.http import JsonResponse
+from django.contrib import messages
 
 def cabañas(request):    
     cabañas_list = Cabaña.objects.all()    
@@ -20,4 +22,18 @@ def create_cabaña(request):
     return render(request, 'cabañas/create.html', {'form': form})
 
 
+def detail_cabaña(request, cabaña_id):
+    cabaña = Cabaña.objects.get(pk=cabaña_id)
+    data = { 'nombre': cabaña.nombre, 'capacidad': cabaña.capacidad, 'precio' : cabaña.precio, 'descripcion' : cabaña.descripcion}    
+    return JsonResponse(data)
+
+
+def delete_cabaña(request, cabaña_id):
+    cabaña = Cabaña.objects.get(pk=cabaña_id)
+    try:
+        cabaña.delete()        
+        messages.success(request, 'cabaña eliminada correctamente.')
+    except:
+        messages.error(request, 'No se puede eliminar la cabaña porque está asociado a otra tabla.')
+    return redirect('cabañas')
 # Create your views here.
