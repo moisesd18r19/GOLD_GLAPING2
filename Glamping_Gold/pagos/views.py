@@ -26,7 +26,7 @@ def create_pagos(request):
 
 def detail_pago(request, pago_id):
     pago = Pago.objects.get(pk=pago_id)
-    data = { 'fecha': pago.fecha, 'valor': pago.valor, 'reserva': pago.reserva }    
+    data = { 'fecha': pago.fecha, 'valor': pago.valor, 'metodo_pago': pago.metodo_pago}    
     return JsonResponse(data)
 
 def delete_pago(request, pago_id):

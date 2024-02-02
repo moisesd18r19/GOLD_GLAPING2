@@ -53,7 +53,7 @@
 
                         
 
-                        <a href="" class="btn btn-info btn-circle btn-sm" data-bs-toggle="modal" data-bs-target="#modalId" data-author-id="{{ cabaña.id }}">
+                        <a href="" class="btn btn-info btn-circle btn-sm" data-bs-toggle="modal" data-bs-target="#modalId" data-cabaña-id="{{ cabaña.id }}">
 
                             <i class="fas fa-info-circle"></i>
                         </a>
@@ -112,9 +112,6 @@ function loadCabañaDetails(cabañaId) {
                         "<p><strong>Nombre:</strong> " + data.nombre + "</p>" +
                         "<p><strong>Capacidad:</strong> " + data.capacidad + "</p>" +
                         "<p><strong>Precio:</strong> " + data.precio + "</p>" +
-                        "<p><strong>Descripcion:</strong> " + data.descripcion + "</p>";
-                                        
-
                         "<p><strong>Descripcion:</strong> " + data.descripcion + "</p>";                
 
                     $('#modalId').modal('show'); // Mover esta línea aquí
@@ -134,7 +131,7 @@ function loadCabañaDetails(cabañaId) {
 
             loadCabañaDetails(cabañaId);
 
-            loadAuthorDetails(cabañaId);
+            
 
         }
     );
