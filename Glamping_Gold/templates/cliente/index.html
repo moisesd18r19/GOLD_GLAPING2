@@ -101,7 +101,7 @@ function loadClienteDetails(clienteId) {
                         "<p><strong>Documento:</strong> " + data.documento + "</p>" + 
                         "<p><strong>Email:</strong> " + data.email+ "</p>" + 
                         "<p><strong>Telefono:</strong> " + data.telefone + "</p>" +  
-                        "<p><strong>Nacionalidad:</strong> " + data.nacionalidad + "</p>" +                 
+                        "<p><strong>Nacionalidad:</strong> " + data.nacionalidad + "</p>";             
                     $('#modalId').modal('show'); // Mover esta línea aquí
                 } else {
                     console.error('Error fetching cliente details. Status code: ' + xhr.status);

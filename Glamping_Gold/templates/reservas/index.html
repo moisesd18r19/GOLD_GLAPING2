@@ -19,7 +19,8 @@
                         <th>Fecha reserva</th>
                         <th>Fecha inicio</th>
                         <th>Fecha fin</th>
-                        <th>Valor</th>                        
+                        <th>Valor</th>  
+                        <th>Cliente</th>                      
                         <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
@@ -31,6 +32,7 @@
                     <td>{{ reserva.fecha_inicio }}</td>
                     <td>{{ reserva.fecha_fin }}</td>
                     <td>{{ reserva.valor }}</td>
+                    <td>{{ reserva.cliente }}</td>
                     <!-- Toggle Switch button -->
                     <td>
                         <select>
@@ -99,7 +101,7 @@ function loadReservaDetails(reservaId) {
                         "<p><strong>Fecha_reserva:</strong> " + data.fecha_reserva + "</p>" +
                         "<p><strong>Fecha_inicio:</strong> " + data.fecha_inicio + "</p>" +
                         "<p><strong>Fecha_fin:</strong> " + data.fecha_fin + "</p>" +
-                        "<p><strong>Valor:</strong> " + data.valor + "</p>" +
+                        "<p><strong>Valor:</strong> " + data.valor + "</p>";
                         
                                       
                     $('#modalId').modal('show'); // Mover esta línea aquí
