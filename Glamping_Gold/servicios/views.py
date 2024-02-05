@@ -33,5 +33,17 @@ def delete_servicio(request, servicio_id):
         servicios.delete()        
         messages.success(request, 'Servicio eliminado correctamente.')
     except:
-        messages.error(request, 'No se puede eliminar el autor porque está asociado a un libro.')
+        messages.error(request, 'No se puede eliminar el servicio porque está asociado a una reserva.')
     return redirect('servicios')
+
+def edit_servicio(request, servicio_id):
+    servicio = Servicio.objects.get(pk=servicio_id)
+    form = ServicioForm(request.POST or None, instance=servicio)
+    if form.is_valid() and request.method == 'POST':
+        try:
+            form.save()
+            messages.success(request, 'Servicio actualizado correctamente.')
+        except:
+            messages.error(request, 'Ocurrió un error al editar el servicio.')        
+        return redirect('servicios')    
+    return render(request, 'servicios/editar.html', {'form': form})
