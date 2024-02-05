@@ -63,6 +63,9 @@
 </div>
 
 
+
+
+
 <div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -92,9 +95,17 @@ function loadClienteDetails(clienteId) {
                 if (xhr.status == 200) {
                     var data = JSON.parse(xhr.responseText);
                     console.log(data);
+
                     // Actualizar el contenido del modal con los detalles
+
+                    // Actualizar el contenido del modal con los detalles del cliente
+
                     document.getElementById("cliente-details").innerHTML =
-                        "<p><strong>Nombre:</strong> " + data.nombre + "</p>" +               
+                        "<p><strong>Nombre:</strong> " + data.nombre + "</p>" +  
+                        "<p><strong>Documento:</strong> " + data.documento + "</p>" + 
+                        "<p><strong>Email:</strong> " + data.email+ "</p>" + 
+                        "<p><strong>Telefono:</strong> " + data.telefone + "</p>" +  
+                        "<p><strong>Nacionalidad:</strong> " + data.nacionalidad + "</p>";             
                     $('#modalId').modal('show'); // Mover esta línea aquí
                 } else {
                     console.error('Error fetching cliente details. Status code: ' + xhr.status);
@@ -104,7 +115,11 @@ function loadClienteDetails(clienteId) {
         xhr.send();
     }
 
+
     // Asignar evento click a los botones 
+
+    // Asignar evento click a los botones de detalle del pago
+
     document.addEventListener("click", function (event) {
         if (event.target && event.target.dataset.clienteId) {
             event.stopPropagation();

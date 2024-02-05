@@ -88,7 +88,7 @@ function loadTipocabañaDetails(tipocabañaId) {
                     console.log(data);
                     // Actualizar el contenido del modal con los detalles del libro
                     document.getElementById("tipocabaña-details").innerHTML =
-                        "<p><strong>Nombre:</strong> " + data.nombre + "</p>" +               
+                        "<p><strong>Nombre:</strong> " + data.nombre + "</p>";              
                     $('#modalId').modal('show'); // Mover esta línea aquí
                 } else {
                     console.error('Error fetching tipocabaña details. Status code: ' + xhr.status);

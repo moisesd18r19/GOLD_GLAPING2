@@ -28,11 +28,12 @@ def detail_servicio(request, servicio_id):
     return JsonResponse(data)
 
 def delete_servicio(request, servicio_id):
-    author = Servicio.objects.get(pk=servicio_id)
+    servicio = Servicio.objects.get(pk=servicio_id)
     try:
         servicios.delete()        
         messages.success(request, 'Servicio eliminado correctamente.')
     except:
+
         messages.error(request, 'No se puede eliminar el servicio porque está asociado a una reserva.')
     return redirect('servicios')
 
@@ -47,3 +48,7 @@ def edit_servicio(request, servicio_id):
             messages.error(request, 'Ocurrió un error al editar el servicio.')        
         return redirect('servicios')    
     return render(request, 'servicios/editar.html', {'form': form})
+
+    messages.error(request, 'No se puede eliminar el servicio porque está asociado a un libro.')
+    return redirect('servicios')
+

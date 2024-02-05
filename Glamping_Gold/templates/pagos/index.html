@@ -62,7 +62,7 @@
 </div>
 
 <div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="fecha">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalTitleId">Detalles del Pago</h5>
@@ -81,7 +81,7 @@
 </div>
 
 <script>
-// Función para cargar detalles del libro en el modal
+// Función para cargar detalles del pago en el modal
 function loadPagoDetails(pagoId) {
         var xhr = new XMLHttpRequest();
         xhr.open("GET", "{% url 'detail_pago' 0 %}".replace('0', pagoId), true);
@@ -90,11 +90,11 @@ function loadPagoDetails(pagoId) {
                 if (xhr.status == 200) {
                     var data = JSON.parse(xhr.responseText);
                     console.log(data);
-                    // Actualizar el contenido del modal con los detalles del libro
+                    // Actualizar el contenido del modal con los detalles del pago
                     document.getElementById("pago-details").innerHTML =
                         "<p><strong>Fecha:</strong> " + data.fecha + "</p>" +
                         "<p><strong>Valor:</strong> " + data.valor + "</p>" +
-                        "<p><strong>Reserva:</strong> " + data.reserva + "</p>";                
+                        "<p><strong>Metodo de pago:</strong> " + data.metodo_pago + "</p>";                
                     $('#modalId').modal('show'); // Mover esta línea aquí
                 } else {
                     console.error('Error fetching pago details. Status code: ' + xhr.status);
@@ -104,7 +104,7 @@ function loadPagoDetails(pagoId) {
         xhr.send();
     }
 
-    // Asignar evento click a los botones de detalle del libro
+    // Asignar evento click a los botones de detalle del pago
     document.addEventListener("click", function (event) {
         if (event.target && event.target.dataset.pagoId) {
             event.stopPropagation();
@@ -114,5 +114,38 @@ function loadPagoDetails(pagoId) {
     });
 
 </script>
+<!-- Alerta eliminar registro Cliente -->
+<script>
+    document.querySelectorAll('.deleteBtn').forEach(function(deleteBtn) {
+    deleteBtn.addEventListener('click', function (event) {
+        event.preventDefault(); 
+
+        swal({
+            title: "Estás seguro que deseas eliminar?",            
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {                
+                window.location.href = this.getAttribute('href');              
+            }
+        });
+    });
+});
+</script>
+
+{% if messages %}
+    {% for message in messages %}
+        <script>
+            swal({                
+                text: "{{ message }}",
+                icon: "{{ message.tags }}",
+                button: "OK",
+            });
+        </script>
+    {% endfor %}
+{% endif %}
+
 
 {%endblock%} 

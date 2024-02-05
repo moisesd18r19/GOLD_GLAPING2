@@ -50,7 +50,11 @@
                         </form>
                     </td>
                     <td>
-                        <a href="" class="btn btn-info btn-circle btn-sm" data-bs-toggle="modal" data-bs-target="#modalId" data-author-id="{{ cabaña.id }}">
+
+                        
+
+                        <a href="" class="btn btn-info btn-circle btn-sm" data-bs-toggle="modal" data-bs-target="#modalId" data-cabaña-id="{{ cabaña.id }}">
+
                             <i class="fas fa-info-circle"></i>
                         </a>
                         <a href="" class="btn btn-warning btn-circle btn-sm">
@@ -68,12 +72,17 @@
     </div>
 </div>
 
+
 <!-- modal y script detalle -->
+
 <div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
+
+
                 <h5 class="modal-title" id="modalTitleId">Detalles de la cabaña</h5>
+
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -104,6 +113,7 @@ function loadCabañaDetails(cabañaId) {
                         "<p><strong>Capacidad:</strong> " + data.capacidad + "</p>" +
                         "<p><strong>Precio:</strong> " + data.precio + "</p>" +
                         "<p><strong>Descripcion:</strong> " + data.descripcion + "</p>";                
+
                     $('#modalId').modal('show'); // Mover esta línea aquí
                 } else {
                     console.error('Error fetching cabaña details. Status code: ' + xhr.status);
@@ -115,14 +125,20 @@ function loadCabañaDetails(cabañaId) {
 
     // Asignar evento click a los botones de detalle del libro
     document.addEventListener("click", function (event) {
-        if (event.target && event.target.dataset.cabañaId) {
+        if (event.target && event.target.dataset.cabañaId) 
             event.stopPropagation();
             var cabañaId = event.target.dataset.cabañaId;
-            loadAuthorDetails(cabañaId);
+
+            loadCabañaDetails(cabañaId);
+
+            
+
         }
-    });
+    );
 
 </script>
+
+
 
 <!-- Alerta delete cabaña -->
 <script>
@@ -156,5 +172,5 @@ function loadCabañaDetails(cabañaId) {
         </script>
     {% endfor %}
 {% endif %}
-
+<
 {%endblock%}

@@ -31,7 +31,7 @@ def create_cliente(request):
 
 def detail_cliente(request, cliente_id):
     cliente = Cliente.objects.get(pk=cliente_id)
-    data = { 'nombre': cliente.nombre }
+    data = { 'nombre': cliente.nombre, 'documento' : cliente.documento, 'email' : cliente.email, 'telefone' : cliente.telefone, 'nacionalidad' : cliente.nacionalidad}
     return JsonResponse(data)
 
 def delete_cliente(request, cliente_id):
