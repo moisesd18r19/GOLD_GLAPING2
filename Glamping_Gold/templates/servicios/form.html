@@ -8,9 +8,15 @@
       class="form-control" name="{{field.name}}" id="" aria-describedby="helpId" 
       placeholder="{{field.field.widget.attrs.placeholder}}"
       value="{{field.value | default:'' }}">
+    
+      {% if field.name == 'imagen' and field.value %}
+      <br>                               
+      <img src="{{MEDIA_URL}}/{{field.value}}" width="50">
+      {% endif %} 
+
       <small id="helpId" class="form-text text-danger">{{field.errors}}</small>
       
-  </div>
+  </div>  
   {% endfor %}
   <button type="submit" class="btn btn-primary">Enviar</button>
-</form> 
+</form>   

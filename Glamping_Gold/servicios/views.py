@@ -39,7 +39,7 @@ def delete_servicio(request, servicio_id):
 
 def edit_servicio(request, servicio_id):
     servicio = Servicio.objects.get(pk=servicio_id)
-    form = ServicioForm(request.POST or None, instance=servicio)
+    form = ServicioForm(request.POST or None, request.FILES or None, instance=servicio)
     if form.is_valid() and request.method == 'POST':
         try:
             form.save()
