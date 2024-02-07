@@ -41,5 +41,18 @@ def delete_cabaña(request, cabaña_id):
     except:
         messages.error(request, 'No se puede eliminar la cabaña porque está asociado a otra tabla.')
     return redirect('cabañas')
+
+
+def edit_cabaña(request, cabaña_id):
+    cabaña = Cabaña.objects.get(pk=cabaña_id)
+    form = CabañaForm(request.POST or None, request.FILES or None, instance=cabaña)
+    if form.is_valid() and request.method == 'POST':
+        try:
+            form.save()
+            messages.success(request, 'Cabaña actualizada correctamente.')
+        except:
+            messages.error(request, 'Ocurrió un error al editar la cabaña.')
+        return redirect('cabañas')    
+    return render(request, 'cabañas/editar.html', {'form': form})
 # Create your views here.
 
