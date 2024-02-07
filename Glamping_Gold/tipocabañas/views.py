@@ -37,6 +37,17 @@ def delete_tipocabaña(request, tipocabaña_id):
         messages.error(request, 'No se puede eliminar el Tipo de cabaña porque está asociado a un libro.')
     return redirect('tipocabañas')
 
+def edit_tipocabaña(request, tipocabaña_id):
+    tipocabaña = Tipocabaña.objects.get(pk=tipocabaña_id)
+    form = TipocabañaForm(request.POST or None, request.FILES or None, instance=tipocabaña)
+    if form.is_valid() and request.method == 'POST':
+        try:
+            form.save()
+            messages.success(request, 'Tipo de cabaña actualizado correctamente.')
+        except:
+            messages.error(request, 'Ocurrió un error al editar el tipo de cabaña.')
+        return redirect('tipocabañas')    
+    return render(request, 'tipocabañas/editar.html', {'form': form})
 
 
 
