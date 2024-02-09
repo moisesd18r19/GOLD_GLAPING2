@@ -28,7 +28,7 @@ urlpatterns = [
     path('cabañas/' , include('cabañas.urls')),
     path('reservas/', include('reservas.urls')),
     path('pagos/', include('pagos.urls')),
-    path('login/', include('login.urls')),
+    path('login/', views.login, name='login'),
     
     
   
